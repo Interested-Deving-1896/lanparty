@@ -1,49 +1,75 @@
-# Kenton's LAN Party House Management Script
+[update-readmes]   Mode: rewrite — migrating to template structure...
+# lanparty
 
-<!-- TOC -->
+[![Built with Ona](https://ona.com/build-with-ona.svg)](https://app.ona.com/#https://github.com/Interested-Deving-1896/lanparty)
 
-- [Introduction](#introduction)
-- [The Magic Sauce](#the-magic-sauce)
-- [How to do it yourself](#how-to-do-it-yourself)
+<!-- AI:start:what-it-does -->
+_Description pending._
+<!-- AI:end:what-it-does -->
 
-<!-- /TOC -->
+## Architecture
 
-## Introduction
+<!-- AI:start:architecture -->
+_Architecture documentation pending._
+<!-- AI:end:architecture -->
 
-[My house](https://lanparty.house) features 22 identical machines used for LAN parties. This repository contains the script I use to manage them, and a guide to creating a similar setup. I use this for gaming, but the setup could be just as useful for office machines, internet cafes, school computer labs, and the like.
+## Install
 
-## The Magic Sauce
+<!-- Add installation instructions here. This section is yours — the AI will not modify it. -->
 
-Normally, maintaining twelve machines used by random guests would have two huge problems:
+```bash
+git clone https://github.com/Interested-Deving-1896/lanparty.git
+cd lanparty
+```
 
-* Every machine would need to be updated before each party. With games regularly pushing multi-GB updates these days, this would take forever.
-* Guests could easily mess up a machine at a party, requiring me to wipe it and start over, taking even more time.
+## Usage
 
-But, I have solved these problems!
+<!-- Add usage examples here. This section is yours — the AI will not modify it. -->
 
-* I only install updates once, and they become immediately available to all machines -- no need even to "clone" the disk image.
-* Any changes made by guests at a party are trivially wiped at the end of the party.
+## Configuration
 
-How?
+<!-- Document configuration options here. This section is yours — the AI will not modify it. -->
 
-* All game machines netboot over iSCSI, from a single server that manages all storage. The game machines don't even use their own disks at all.
-* The server maintains a single master image, along with a copy-on-write overlay for each game machine. Any writes originating from one machine are written only to its private overlay. Any reads check the overlay first, and if the data hasn't been modified, read directly from the master image.
-* When installing updates, I still use an overlay, but I then merge the overlay back into the master image once updates are complete.
+## CI
 
-Results:
+<!-- AI:start:ci -->
+_CI documentation pending._
+<!-- AI:end:ci -->
 
-* Since the overlays start empty, they can be created instantaneously at the start of the party. There is no need to copy the complete contents of the disk for each machine (which would take forever!).
-* At the end of a party, the overlays are simply deleted, wiping out any changes any guest may have made. This, again, takes no time.
-* Each overlay need only be big enough to store the *changes* made during a party, which are typically minimal. 20GB per overlay is plenty, even if the master image is terabytes in size.
+## Mirror chain
 
-## How to do it yourself
+<!-- AI:start:mirror-chain -->
+This repo is maintained in [`Interested-Deving-1896/lanparty`](https://github.com/Interested-Deving-1896/lanparty) and mirrored through:
 
-This repository contains the script I use to manage the computers, as well as a guide to help you replicate my setup. This repo will help you:
+```
+Interested-Deving-1896/lanparty  ──►  OpenOS-Project-OSP/lanparty  ──►  OpenOS-Project-Ecosystem-OOC/lanparty
+```
 
-* Create a master volume and space for overlays using LVM.
-* Configure DHCP, tftp, iPXE, and iSCSI for netboot.
-* Configure a private DNS server so your machines can name each other (optional).
-* Set up and tear down overlays for parties, as well as arrange to install updates, using a convenient script.
-* Install Windows 10 directly to an iSCSI device.
+Changes flow downstream automatically via the hourly mirror chain in
+[`fork-sync-all`](https://github.com/Interested-Deving-1896/fork-sync-all).
+Direct commits to OSP or OOC are detected and opened as PRs back to `Interested-Deving-1896`.
+<!-- AI:end:mirror-chain -->
 
-[To get started, see the guide »](guide.md)
+## Contributors
+
+<!-- AI:start:contributors -->
+_Contributors pending._
+<!-- AI:end:contributors -->
+
+## Origins
+
+<!-- AI:start:origins -->
+_Original project — no upstream fork._
+<!-- AI:end:origins -->
+
+## Resources
+
+<!-- AI:start:resources -->
+_No additional resource files found._
+<!-- AI:end:resources -->
+
+## License
+
+<!-- AI:start:license -->
+[MIT](https://github.com/Interested-Deving-1896/lanparty/blob/master/LICENSE) © 2026 [Interested-Deving-1896](https://github.com/Interested-Deving-1896)
+<!-- AI:end:license -->
